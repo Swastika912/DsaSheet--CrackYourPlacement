@@ -1,0 +1,22 @@
+class Solution {
+    public boolean isBalanced(TreeNode root) {
+        if(root ==null){
+            return true;
+        }
+        boolean[] tick = new boolean[1];
+        tick[0] = true;
+        int height = height(root , tick) ;
+        return tick[0];
+    }
+    public int height(TreeNode root , boolean[] tick){
+        if(root == null){
+            return 0;
+        }
+        int left = height(root.left , tick);
+        int right = height(root.right, tick);
+        if( Math.abs(left - right) > 1){
+            tick[0] = false;
+        }
+        return Math.max(left, right)+1;
+    }
+    }
