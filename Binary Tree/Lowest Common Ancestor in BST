@@ -1,0 +1,27 @@
+class Solution {
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        int a,b;
+        
+        if(p.val>q.val){
+            a= q.val;
+            b = p.val;
+        }else{
+            a = p.val;
+            b = q.val;
+        }
+        return preorder(root,a,b);
+        
+    }
+    public TreeNode preorder(TreeNode root, int p, int q){
+        if( root == null){
+            return null;
+        }
+        if(root.val >= p && root.val <= q){
+            return root;
+        }
+        TreeNode left = preorder(root.left , p , q) ;
+        TreeNode right = preorder(root.right, p,q);
+        
+        return (left != null)? left : right;
+    }
+}
